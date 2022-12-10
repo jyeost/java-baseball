@@ -13,7 +13,7 @@ public class Balls {
     public Balls() {
     }
 
-    public Balls(String userInput) throws IllegalArgumentException {
+    public Balls(String userInput) {
         balls = new ArrayList<>();
         validateLength(userInput);
         validateIsNumber(userInput);
@@ -23,7 +23,7 @@ public class Balls {
     public void makeRandomBalls() {
         balls = new ArrayList<>();
         while (balls.size() < BALLS_LENGTH) {
-            Ball ball = new Ball(Randoms.pickNumberInRange(1, 9));
+            Ball ball = new Ball(Randoms.pickNumberInRange(Ball.MIN_NUMBER, Ball.MAX_NUMBER));
             if (!balls.contains(ball)) {
                 balls.add(ball);
             }
@@ -44,12 +44,12 @@ public class Balls {
         }
     }
 
-    private void makeUserBalls(String userInput) throws NumberFormatException {
+    private void makeUserBalls(String userInput) {
         for (String number : userInput.split("")) {
             Ball ball = new Ball(number);
             if (!balls.contains(ball)) balls.add(ball);
         }
-        if (balls.size() != 3) throw new IllegalArgumentException();
+        if (balls.size() != BALLS_LENGTH) throw new IllegalArgumentException();
     }
 
     public boolean contains(Ball ball) {
