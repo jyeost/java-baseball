@@ -1,14 +1,15 @@
 package baseball.view;
 
+import baseball.model.Judge;
 import baseball.model.JudgeResult;
 
 public class OutputView implements OutPut {
     @Override
-    public void printJudgeResult() {
+    public void printJudgeResult(Judge judge) {
         String result = "";
-        if (JudgeResult.STRIKE.getCount() == 0 && JudgeResult.BALL.getCount() == 0) result += "낫싱";
-        if (JudgeResult.BALL.getCount() != 0) result += JudgeResult.BALL.getCount() + JudgeResult.BALL.getValue() + " ";
-        if (JudgeResult.STRIKE.getCount() != 0) result += JudgeResult.STRIKE.getCount() + JudgeResult.STRIKE.getValue();
+        if (judge.getStrikeResult() == 0 && judge.getBallResult() == 0) result += JudgeResult.NOTHING.getValue();
+        if (judge.getBallResult() != 0) result += judge.getBallResult() + JudgeResult.BALL.getValue() + " ";
+        if (judge.getStrikeResult() != 0) result += judge.getStrikeResult() + JudgeResult.STRIKE.getValue();
         System.out.println(result);
     }
 }

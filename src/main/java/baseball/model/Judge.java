@@ -1,29 +1,38 @@
 package baseball.model;
 
 public class Judge {
+    private int ballResult;
+    private int strikeResult;
 
     public Judge(Balls userBalls, Balls computerBalls) {
-        JudgeResult.BALL.initCount();
-        JudgeResult.STRIKE.initCount();
-
+        this.ballResult = 0;
+        this.strikeResult = 0;
         judgeBallsAndStrike(userBalls, computerBalls);
     }
 
     private void judgeBallsAndStrike(Balls userBalls, Balls computerBalls) {
         for (int i = 0; i < Balls.BALLS_LENGTH; i++) {
             if (userBalls.contains(computerBalls.get(i))) {
-                JudgeResult.BALL.plusCount();
+                ballResult++;
             }
         }
         judgeStrike(userBalls, computerBalls);
-        JudgeResult.BALL.setBall();
+        ballResult = ballResult - strikeResult;
     }
 
     private void judgeStrike(Balls userBalls, Balls computerBalls) {
         for (int i = 0; i < Balls.BALLS_LENGTH; i++) {
             if (userBalls.get(i).equals(computerBalls.get(i))) {
-                JudgeResult.STRIKE.plusCount();
+                strikeResult++;
             }
         }
+    }
+
+    public int getBallResult() {
+        return ballResult;
+    }
+
+    public int getStrikeResult() {
+        return strikeResult;
     }
 }

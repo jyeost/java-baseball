@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Balls {
-
     public static final int BALLS_LENGTH = 3;
+    public static final String BALL_ERROR_MSG = "볼은 중복없는 숫자야여 하며, " + Ball.MIN_NUMBER + "과 " + Ball.MAX_NUMBER + "사이어야 합니다";
     private List<Ball> balls;
 
     public Balls() {
@@ -32,7 +32,7 @@ public class Balls {
 
     private void validateLength(String userInput) {
         if (!(userInput != null && userInput.length() == BALLS_LENGTH)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(BALL_ERROR_MSG);
         }
     }
 
@@ -40,7 +40,7 @@ public class Balls {
         try {
             Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(BALL_ERROR_MSG);
         }
     }
 
@@ -49,7 +49,7 @@ public class Balls {
             Ball ball = new Ball(number);
             if (!balls.contains(ball)) balls.add(ball);
         }
-        if (balls.size() != BALLS_LENGTH) throw new IllegalArgumentException();
+        if (balls.size() != BALLS_LENGTH) throw new IllegalArgumentException(BALL_ERROR_MSG);
     }
 
     public boolean contains(Ball ball) {

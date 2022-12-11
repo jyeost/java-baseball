@@ -2,15 +2,13 @@ package baseball.controller;
 
 import baseball.model.Balls;
 import baseball.model.Judge;
-import baseball.model.JudgeResult;
 import baseball.model.ReGame;
 import baseball.view.Input;
 import baseball.view.OutPut;
 
 public class GameController {
-
-    Input input;
-    OutPut outPut;
+    private final Input input;
+    private final OutPut outPut;
 
     public GameController(Input input, OutPut outPut) {
         this.input = input;
@@ -26,13 +24,12 @@ public class GameController {
     public void play() {
         Balls computerBalls = new Balls();
         computerBalls.makeRandomBalls();
+        Judge judge;
         do {
             Balls userBalls = input.getUserBalls();
-            new Judge(userBalls, computerBalls);
-            outPut.printJudgeResult();
-        } while (JudgeResult.STRIKE.getCount() != JudgeResult.STRIKE.getGoal());
-        if (input.userReGame() == ReGame.RE_GAME) play();
+            judge = new Judge(userBalls, computerBalls);
+            outPut.printJudgeResult(judge);
+        } while (judge.getStrikeResult() != Balls.BALLS_LENGTH);
+        if (input.getUserReGame() == ReGame.RE_GAME) play();
     }
-
-
 }

@@ -11,19 +11,19 @@ public class InputView implements Input {
         try {
             return new Balls(Console.readLine());
         } catch (IllegalArgumentException e) {
-            System.out.println("잘못된 숫자를 입력하셨습니다.");
+            System.out.println(e.getMessage());
             return getUserBalls();
         }
     }
 
     @Override
-    public ReGame userReGame() {
+    public ReGame getUserReGame() {
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료" + System.lineSeparator() + "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         String userInput = Console.readLine();
         if (ReGame.RE_GAME.getValue().equals(userInput)) return ReGame.RE_GAME;
         if (ReGame.QUIT.getValue().equals(userInput)) return ReGame.QUIT;
         // throw new IllegalArgumentException();
         System.out.println("1 또는 2만 입력가능 합니다.");
-        return userReGame();
+        return getUserReGame();
     }
 }

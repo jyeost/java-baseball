@@ -7,5 +7,5 @@ public interface Input {
 
     Balls getUserBalls();
 
-    ReGame userReGame();
+    ReGame getUserReGame();
 }

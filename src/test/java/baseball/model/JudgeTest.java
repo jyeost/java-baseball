@@ -12,12 +12,12 @@ class JudgeTest {
     void validateAllStrike() {
         Balls computerBalls = new Balls("123");
         Balls userBalls = new Balls("123");
-        new Judge(computerBalls, userBalls);
+        Judge judge = new Judge(computerBalls, userBalls);
 
-        assertThat(JudgeResult.STRIKE.getCount())
-                .isEqualTo(JudgeResult.STRIKE.getGoal());
-        assertThat(JudgeResult.BALL.getCount())
-                .isEqualTo(JudgeResult.BALL.getGoal());
+        assertThat(judge.getStrikeResult())
+                .isEqualTo(3);
+        assertThat(judge.getBallResult())
+                .isEqualTo(0);
     }
 
     @DisplayName("AllBall시 스트라이크와 볼 개수가 JudgeResult에 제대로 입력되는지 알아본다")
@@ -25,11 +25,11 @@ class JudgeTest {
     void validateAllBall() {
         Balls computerBalls = new Balls("123");
         Balls userBalls = new Balls("312");
-        new Judge(computerBalls, userBalls);
+        Judge judge = new Judge(computerBalls, userBalls);
 
-        assertThat(JudgeResult.STRIKE.getCount())
+        assertThat(judge.getStrikeResult())
                 .isEqualTo(0);
-        assertThat(JudgeResult.BALL.getCount())
+        assertThat(judge.getBallResult())
                 .isEqualTo(3);
     }
 
@@ -38,11 +38,11 @@ class JudgeTest {
     void validate2Ball1Strike() {
         Balls computerBalls = new Balls("123");
         Balls userBalls = new Balls("213");
-        new Judge(computerBalls, userBalls);
+        Judge judge = new Judge(computerBalls, userBalls);
 
-        assertThat(JudgeResult.STRIKE.getCount())
+        assertThat(judge.getStrikeResult())
                 .isEqualTo(1);
-        assertThat(JudgeResult.BALL.getCount())
+        assertThat(judge.getBallResult())
                 .isEqualTo(2);
     }
 
@@ -51,11 +51,11 @@ class JudgeTest {
     void validateNothing() {
         Balls computerBalls = new Balls("123");
         Balls userBalls = new Balls("456");
-        new Judge(computerBalls, userBalls);
+        Judge judge = new Judge(computerBalls, userBalls);
 
-        assertThat(JudgeResult.STRIKE.getCount())
+        assertThat(judge.getStrikeResult())
                 .isEqualTo(0);
-        assertThat(JudgeResult.BALL.getCount())
+        assertThat(judge.getBallResult())
                 .isEqualTo(0);
     }
 
