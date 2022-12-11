@@ -24,12 +24,14 @@ public class GameController {
     public void play() {
         Balls computerBalls = new Balls();
         computerBalls.makeRandomBalls();
-        Judge judge;
-        do {
-            Balls userBalls = input.getUserBalls();
-            judge = new Judge(userBalls, computerBalls);
-            outPut.printJudgeResult(judge);
-        } while (judge.getStrikeResult() != Balls.BALLS_LENGTH);
+        getAndJudgeUserBalls(computerBalls);
         if (input.getUserReGame() == ReGame.RE_GAME) play();
+    }
+
+    private void getAndJudgeUserBalls(Balls computerBalls) {
+        Balls userBalls = input.getUserBalls();
+        Judge judge = new Judge(userBalls, computerBalls);
+        outPut.printJudgeResult(judge);
+        if (judge.getStrikeResult() != Balls.BALLS_LENGTH) getAndJudgeUserBalls(computerBalls);
     }
 }
